@@ -1,0 +1,14 @@
+application:
+name: mybatis-service
+
+mybatis:
+type-aliases-package: gt.iot.wlw.flink.entity
+mapper-locations: classpath:dao/*.xml
+
+spring:
+  datasource:
+    server:
+      driver-class-name: com.taosdata.jdbc.rs.RestfulDriver
+      jdbc-url: jdbc:TAOS-RS://10.152.160.183:6041/gt_iot?user=root&password=taosdata
+      username: root
+      password: taosdata
