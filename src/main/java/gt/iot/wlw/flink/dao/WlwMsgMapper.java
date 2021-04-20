@@ -2,15 +2,13 @@ package gt.iot.wlw.flink.dao;
 
 import gt.iot.wlw.flink.entity.WLwMsg;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.transaction.annotation.Transactional;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Map;
 
-@Transactional(transactionManager = "tdengineTransactionManager")
-@Mapper
 public interface WlwMsgMapper {
 
-     int insertWlwMsg(WLwMsg wLwMsg);
+     int insertWlwMsg(@Param("theme")String theme,@Param("wlwMsg")String wlwmsg);
 
      Map<String , Object> selectMsg();
 

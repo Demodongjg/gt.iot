@@ -9,6 +9,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.util.Date;
 
 
 @Component
@@ -34,11 +36,13 @@ public class MQTTReceiveCallback implements MqttCallback {
         // subscribe后得到的消息会执行到这里面
         System.out.println("接收消息主题 : " + topic);
         System.out.println("接收消息Qos : " + message.getQos());
-        System.out.println("接收消息内容 : " + new String(message.getPayload(),"UTF-8"));
+        System.out.println("接收消息内容 : " + new String(message.getPayload(),"UTF-8").length());
+        String wlwMessage = new String(message.getPayload(),"UTF-8");
+        System.out.println(new Date());
         try {
             wLwMsg.setTheme(topic);
             wLwMsg.setWlwMsg(new String(message.getPayload(),"UTF-8"));
-            int a = wlwMsgMapper.insertWlwMsg(wLwMsg);
+            int a = wlwMsgMapper.insertWlwMsg(topic,wlwMessage);
             //wlwMsgMapper.selectMsg();
         }catch (Exception e){
             e.printStackTrace();

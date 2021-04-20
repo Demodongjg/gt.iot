@@ -2,21 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gt.iot.wlw.flink.dao.WlwMsgMapper">
 
-	<resultMap id="BaseResultMap" type="gt.iot.wlw.flink.entity.WLwMsg">
-		<result column="THEME" jdbcType="VARCHAR" property="theme" />
-		<result column="WLWMSG" jdbcType="VARCHAR" property="wlwMsg" />
-	</resultMap>
+<!--	<resultMap id="BaseResultMap" type="gt.iot.wlw.flink.entity.WLwMsg">-->
+<!--		<result column="time" jdbcType="TIMESTAMP" property="time" />-->
+<!--		<result column="theme" jdbcType="VARCHAR" property="theme" />-->
+<!--		<result column="wlwMsg" jdbcType="VARCHAR" property="wlwMsg" />-->
+<!--	</resultMap>-->
 
-	<insert id="insertWlwMsg" parameterType="gt.iot.wlw.flink.entity.WLwMsg" >
-		insert into wlwmsg(THEME,WLWMSG)
+	<insert id="insertWlwMsg">
+		insert into wlwmsg(time,theme,message)
 		values
 		(
-		 #{theme} ,#{wlwMsg}
+		 now, #{theme} ,#{wlwMsg}
 		)
 	</insert>
 
-	 <select id="selectMsg" resultType="java.util.HashMap" >
-		select topic from wlwmsg
+	 <select id="selectMsg" >
+		select wlwmsg from wlwmsg where theme = '1'
 	</select>
 
 
